@@ -1,0 +1,41 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr: none
+
+pool:
+  vmImage: windows-latest
+
+stages:
+  - stage: Deploy
+    displayName: Sync PBIP to workspace
+    jobs:
+      - job: DeployJob
+        displayName: Publish to Power BI workspace
+        steps:
+
+          - checkout: self
+
+          - task: UsePythonVersion@0
+            displayName: Use Python 3.12
+            inputs:
+              versionSpec: '3.12'
+              addToPath: true
+
+          - task: AzureCLI@2
+            displayName: Deploy PBIP via fabric-cicd
+            inputs:
+              azureSubscription: 'your-azure-service-connection'
+              scriptType: ps
+              scriptLocation: inlineScript
+              inlineScript: |
+                pip install fabric-cicd
+
+                python -u deploy.py --workspace_id "$(workspaceId)"
+
+                if ($LASTEXITCODE -ne 0) {
+                  Write-Error "Deployment failed with exit code $LASTEXITCODE"
+                  exit $LASTEXITCODE
+                }
