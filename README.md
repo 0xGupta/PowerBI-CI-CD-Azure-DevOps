@@ -160,7 +160,7 @@ Tenant ID:            your-directory-tenant-id
 Name:                 your-azure-service-connection
 ```
 
-> The name you give this connection must match the `azureSubscription:` value in [`deployToWorkspace.yml`](deployToWorkspace.yml).
+> The name you give this connection must match the `azureSubscription:` value in [`deployToWorkspace.yml`](deploytoworkspace.yml).
 
 ---
 
