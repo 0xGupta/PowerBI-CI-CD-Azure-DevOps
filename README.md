@@ -65,7 +65,7 @@ fabric-cicd publishes .SemanticModel and .Report folders to Fabric workspace
 
 ## Pipeline overview
 
-### [`deployToWorkspace.yml`](deployToWorkspace.yml) — CD pipeline
+### [`deployToWorkspace.yml`](deploytoworkspace.yml) — CD pipeline
 
 Triggers on every merge to `main`. Uses `AzureCLI@2` to authenticate via service connection, then runs `deploy.py` which calls `fabric-cicd` to publish all PBIP items to the target workspace.
 
